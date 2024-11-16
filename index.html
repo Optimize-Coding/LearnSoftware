@@ -1,47 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
+        /* General Styling */
+        * {
             margin: 0;
             padding: 0;
-            background-image: linear-gradient(to bottom, #003153, #001A33);
-            color: #ffffff;
+            box-sizing: border-box;
         }
 
-        header {
-            background-image: linear-gradient(to right, #4B0082, #800080);
+        body {
+            font-family: 'Roboto', sans-serif;
             color: #ffffff;
-            padding: 30px;
+            background: linear-gradient(to bottom, #001A33, #000000);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #4B0082, #800080);
             text-align: center;
+            padding: 50px 20px;
             border-bottom: 2px solid #ffffff;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 15px rgba(255, 255, 255, 0.3);
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 10px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 30px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
 
+        header select {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #4B0082;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        header select:hover {
+            background-color: #800080;
+        }
+
+        /* Starry Background */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Starry_night_sky_background.jpg/800px-Starry_night_sky_background.jpg') repeat;
+            background-size: cover;
+            z-index: -1;
+            animation: starField 30s linear infinite;
+        }
+
+        @keyframes starField {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -500px 500px;
+            }
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Project Embed Styling */
         .embed {
             margin: 30px 0;
             border: 2px solid rgba(255, 255, 255, 0.4);
-            border-radius: 6px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
         }
 
         .embed h3 {
@@ -51,13 +113,18 @@
             font-size: 1.5rem;
         }
 
+        .embed p {
+            margin: 0;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
             padding: 30px;
-            background-image: linear-gradient(to right, #4B0082, #800080);
+            background: linear-gradient(to right, #4B0082, #800080);
             color: #ffffff;
             border-top: 2px solid #ffffff;
-            box-shadow: 0 -2px 10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 -2px 15px rgba(255, 255, 255, 0.3);
         }
 
         footer a {
@@ -70,254 +137,200 @@
         footer a:hover {
             color: #D8BFD8;
         }
-
-        /* Add a subtle starry background */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Starry_night_sky_background.jpg/800px-Starry_night_sky_background.jpg');
-            background-size: cover;
-            z-index: -1;
-            animation: starField 60s linear infinite;
-        }
-
-        @keyframes starField {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: -100% 0;
-            }
-        }
-
-        /* Add a subtle glow effect */
-        .container, .embed, footer {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-        }
     </style>
 </head>
+
 <body>
+    <header>
+        <h1>Projects</h1>
+        <p>Select the type of projects you would like to see:</p>
+        <select id="projectFilter" onchange="filterProjects()">
+            <option value="all">All Projects</option>
+            <option value="data-visualization">Data Visualization</option>
+            <option value="front-end">Front End Development</option>
+            <option value="js-algorithms">JavaScript Algorithms</option>
+            <option value="responsive-design">Responsive Web Design</option>
+        </select>
+    </header>
 
-<header>
-    <h1>Projects</h1>
-    <p>Select the type of projects you would like to see:</p>
-    <select id="projectFilter">
-        <option value="all">All Projects</option>
-        <option value="data-visualization">Data Visualization</option>
-        <option value="front-end">Front End Development</option>
-        <option value="js-algorithms">JavaScript Algorithms</option>
-        <option value="responsive-design">Responsive Web Design</option>
-    </select>
-</header>
+    <div class="container" id="projectsContainer">
+        <h2>Data Visualization Developer Projects</h2>
+        <div class="embed data-visualization">
+            <h3>Treemap Diagram</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="mdNBQeE" data-pen-title="Treemap Diagram" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/mdNBQeE">Treemap Diagram</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed data-visualization">
+            <h3>Choropleth Map</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="KKOXrpo" data-pen-title="Choropleth Map" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/KKOXrpo">Choropleth Map</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed data-visualization">
+            <h3>Heat Map</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result " data-slug-hash="qBePQBe" data-pen-title="Heat Map" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/qBePQBe">Heat Map</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed data-visualization">
+            <h3>Scatterplot Graph</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="oNKGQNv" data-pen-title="Scatterplot Graph" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/oNKGQNv">Scatterplot Graph</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed data-visualization">
+            <h3>Bar Chart</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="yLmzQBj" data-pen-title="Bar Chart" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/yLmzQBj">Bar Chart</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+    </div>
+    
+    <div class="container" id="frontEndProjects">
+        <h2>Front End Development Libraries Projects</h2>
+        <div class="embed front-end">
+            <h3>Random Quote Machine</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="RwXLBwa" data-pen-title="Random Quote Machine" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/RwXLBwa">Random Quote Machine</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed front-end">
+            <h3>Markdown Previewer</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result " data-slug-hash="qBePyRE" data-pen-title="Markdown Previewer" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/qBePyRE">Markdown Previewer</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed front-end">
+            <h3>Drum Machine</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="PoMJBmj" data-pen-title="Drum Machine" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/PoMJBmj">Drum Machine</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed front-end">
+            <h3>JavaScript Calculator</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="YzmrjrG" data-pen-title="JavaScript Calculator" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/YzmrjrG">JavaScript Calculator</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed front-end">
+            <h3>25 + 5 Clock</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="WNVZKZJ" data-pen-title="25 + 5 Clock" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/WNVZKZJ">25 + 5 Clock</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+    </div>
+    
+    <div class="container" id="jsAlgorithmsProjects">
+        <h2>JavaScript Algorithms and Data Structure Developer Projects</h2>
+        <div class="embed js-algorithms">
+            <h3>Palindrome Checker</h3>
+            <p class="codepen" data-height="300 ```html
+            " data-theme-id="light" data-default-tab="html,result" data-slug-hash="QWeYbBj" data-pen-title="Palindrome Checker" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/QWeYbBj">Palindrome Checker</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed js-algorithms">
+            <h3>Roman Numeral Converter</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="abeXOjV" data-pen-title="Roman Numeral Converter" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/abeXOjV">Roman Numeral Converter</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed js-algorithms">
+            <h3>Telephone Number Validator</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="QWeYbVj" data-pen-title="Telephone Number Validator" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/QWeYbVj">Telephone Number Validator</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed js-algorithms">
+            <h3>Cash Register</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="qBegdMY" data-pen-title="Cash Register" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/qBegdMY">Cash Register</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed js-algorithms">
+            <h3>Pokémon Search App</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="OJKdVoK" data-pen-title="Pokémon Search App" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/OJKdVoK">Pokémon Search App</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+    </div>
+    
+    <div class="container" id="responsiveDesignProjects">
+        <h2>Responsive Web Design Developer Projects</h2>
+        <div class="embed responsive-design">
+            <h3>Survey Form</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="poMGJQE" data-pen-title="Survey Form" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/poMGJQE">Survey Form</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed responsive-design">
+            <h3>Tribute Page</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="jOgdPdr" data-pen-title="Tribute Page" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/jOgdPdr">Tribute Page</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed responsive-design">
+            <h3>Technical Documentation Page</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="Jjgxdxv" data-pen-title="Technical Documentation Page" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/Jjgxdxv">Technical Documentation Page</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed responsive-design">
+            <h3>Product Landing Page</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html ```html
+    ,result" data-slug-hash="bGXzdZd" data-pen-title="Product Landing Page" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/bGXzdZd">Product Landing Page</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+        <div class="embed responsive-design">
+            <h3>Personal Portfolio Webpage</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="dyxaorg" data-pen-title="Personal Portfolio Webpage" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/dyxaorg">Personal Portfolio Webpage</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
+            </p>
+            <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        </div>
+    </div>
 
-<div class="container" id="projectsContainer">
-    <h2>Data Visualization Developer Projects</h2>
-    <div class="embed data-visualization">
-        <h3>Treemap Diagram</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="mdNBQeE" data-pen-title="Treemap Diagram" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/mdNBQeE">Treemap Diagram</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed data-visualization">
-        <h3>Choropleth Map</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="KKOXrpo" data-pen-title="Choropleth Map" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/KKOXrpo">Choropleth Map</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed data-visualization">
-        <h3>Heat Map</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result " data-slug-hash="qBePQBe" data-pen-title="Heat Map" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/qBePQBe">Heat Map</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed data-visualization">
-        <h3>Scatterplot Graph</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="oNKGQNv" data-pen-title="Scatterplot Graph" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/oNKGQNv">Scatterplot Graph</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed data-visualization">
-        <h3>Bar Chart</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="yLmzQBj" data-pen-title="Bar Chart" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/yLmzQBj">Bar Chart</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-</div>
+    <footer>
+        <p>&copy; 2024 Niladri Das. All rights reserved.</p>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+    </footer>
 
-<div class="container" id="frontEndProjects">
-    <h2>Front End Development Libraries Projects</h2>
-    <div class="embed front-end">
-        <h3>Random Quote Machine</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="RwXLBwa" data-pen-title="Random Quote Machine" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/RwXLBwa">Random Quote Machine</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed front-end">
-        <h3>Markdown Previewer</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result " data-slug-hash="qBePyRE" data-pen-title="Markdown Previewer" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/qBePyRE">Markdown Previewer</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed front-end">
-        <h3>Drum Machine</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="PoMJBmj" data-pen-title="Drum Machine" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/PoMJBmj">Drum Machine</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed front-end">
-        <h3>JavaScript Calculator</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="YzmrjrG" data-pen-title="JavaScript Calculator" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/YzmrjrG">JavaScript Calculator</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed front-end">
-        <h3>25 + 5 Clock</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="WNVZKZJ" data-pen-title="25 + 5 Clock" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/WNVZKZJ">25 + 5 Clock</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-</div>
+    <script>
+        function filterProjects() {
+            const filter = document.getElementById("projectFilter").value;
+            const embeds = document.querySelectorAll(".embed");
 
-<div class="container" id="jsAlgorithmsProjects">
-    <h2>JavaScript Algorithms and Data Structure Developer Projects</h2>
-    <div class="embed js-algorithms">
-        <h3>Palindrome Checker</h3>
-        <p class="codepen" data-height="300 ```html
-        " data-theme-id="light" data-default-tab="html,result" data-slug-hash="QWeYbBj" data-pen-title="Palindrome Checker" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/QWeYbBj">Palindrome Checker</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed js-algorithms">
-        <h3>Roman Numeral Converter</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="abeXOjV" data-pen-title="Roman Numeral Converter" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/abeXOjV">Roman Numeral Converter</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed js-algorithms">
-        <h3>Telephone Number Validator</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="QWeYbVj" data-pen-title="Telephone Number Validator" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/QWeYbVj">Telephone Number Validator</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed js-algorithms">
-        <h3>Cash Register</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="qBegdMY" data-pen-title="Cash Register" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/qBegdMY">Cash Register</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed js-algorithms">
-        <h3>Pokémon Search App</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="OJKdVoK" data-pen-title="Pokémon Search App" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/OJKdVoK">Pokémon Search App</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-</div>
-
-<div class="container" id="responsiveDesignProjects">
-    <h2>Responsive Web Design Developer Projects</h2>
-    <div class="embed responsive-design">
-        <h3>Survey Form</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="poMGJQE" data-pen-title="Survey Form" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/poMGJQE">Survey Form</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed responsive-design">
-        <h3>Tribute Page</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="jOgdPdr" data-pen-title="Tribute Page" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/jOgdPdr">Tribute Page</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed responsive-design">
-        <h3>Technical Documentation Page</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="Jjgxdxv" data-pen-title="Technical Documentation Page" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/Jjgxdxv">Technical Documentation Page</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed responsive-design">
-        <h3>Product Landing Page</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html ```html
-,result" data-slug-hash="bGXzdZd" data-pen-title="Product Landing Page" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/bGXzdZd">Product Landing Page</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-    <div class="embed responsive-design">
-        <h3>Personal Portfolio Webpage</h3>
-        <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="dyxaorg" data-pen-title="Personal Portfolio Webpage" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/dyxaorg">Personal Portfolio Webpage</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-        </p>
-        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </div>
-</div>
-
-<footer>
-    <p>&copy; Niladri Das 2024</p>
-    <p>
-        <a href="https://x.com/bniladridas" target="_blank">X</a> | 
-        <a href="https://www.linkedin.com/in/bniladridas" target="_blank">LinkedIn</a> | 
-        <a href="https://github.com/bniladridas" target="_blank">GitHub</a> |
-        <a href="https://codepen.io/Niladri-Das/pen/JjgxGwR" target="_blank">Source Code</a>
-    </p>
-</footer>
-
-<script>
-    const projectFilter = document.getElementById('projectFilter');
-    const projectsContainer = document.getElementById('projectsContainer');
-    const frontEndProjects = document.getElementById('frontEndProjects');
-    const jsAlgorithmsProjects = document.getElementById('jsAlgorithmsProjects');
-    const responsiveDesignProjects = document.getElementById('responsiveDesignProjects');
-
-    projectFilter.addEventListener('change', function() {
-        const selectedValue = this.value;
-
-        // Show all projects by default
-        projectsContainer.style.display = 'block';
-        frontEndProjects.style.display = 'block';
-        jsAlgorithmsProjects.style.display = 'block';
-        responsiveDesignProjects.style.display = 'block';
-
-        // Hide projects based on selection
-        if (selectedValue === 'data-visualization') {
-            frontEndProjects.style.display = 'none';
-            jsAlgorithmsProjects.style.display = 'none';
-            responsiveDesignProjects.style.display = 'none';
-        } else if (selectedValue === 'front-end') {
-            projectsContainer.style.display = 'none';
-            jsAlgorithmsProjects.style.display = 'none';
-            responsiveDesignProjects.style.display = 'none';
-        } else if (selectedValue === 'js-algorithms') {
-            projectsContainer.style.display = 'none';
-            frontEndProjects.style.display = 'none';
-            responsiveDesignProjects.style.display = 'none';
-        } else if (selectedValue === 'responsive-design') {
-            projectsContainer.style.display = 'none';
-            frontEndProjects.style.display = 'none';
-            jsAlgorithmsProjects.style.display = 'none';
+            embeds.forEach(embed => {
+                if (filter === "all" || embed.classList.contains(filter)) {
+                    embed.style.display = "block";
+                } else {
+                    embed.style.display = "none";
+                }
+            });
         }
-    });
-</script>
-
+    </script>
 </body>
+
 </html>
