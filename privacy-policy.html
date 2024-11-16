@@ -5,57 +5,172 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy</title>
+    <link rel="icon" href="/img/favicon.png" type="image/x-icon">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #D8BFD8, #4B0082);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+        /* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container-custom {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    background: linear-gradient(to bottom, #001A33, #000000);
+    position: relative;
+    overflow-x: hidden;
+}
 
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #D8BFD8;
-            margin-bottom: 30px;
-        }
+/* Header */
+header {
+    background-color: #00FF00; /* Set header background to green */
+    text-align: center;
+    padding: 50px 20px;
+    border-bottom: 2px solid #ffffff;
+    box-shadow: 0 2px 15px rgba(255, 255, 255, 0.3);
+}
 
-        h2 {
-            font-size: 1.5rem;
-            color: #FFFFFF;
-            margin-top: 20px;
-        }
+header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
 
-        p {
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
 
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-            text-decoration: none;
-            color: #FFD700;
-            font-weight: bold;
-        }
+header select {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #4B0082; /* Keep this color as is */
+    color: #ffffff;
+    cursor: pointer;
+}
 
-        a:hover {
-            color: #FF69B4;
-        }
+header select:hover {
+    background-color: #800080; /* Keep this color as is */
+}
+
+/* Starry Background */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Starry_night_sky_background.jpg/800px-Starry_night_sky_background.jpg') repeat;
+    background-size: cover;
+    z-index: -1;
+    animation: starField 30s linear infinite;
+}
+
+@keyframes starField {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -500px 500px;
+    }
+}
+
+/* Container Styling */
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 25px rgba(255, 255, 255, 0.3);
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Project Embed Styling */
+.embed {
+    margin: 30px 0;
+    border-radius: 10px; 
+}
+
+.embed h3 {
+    background-color: rgba(255,255,255,0.1);
+    padding: 15px; 
+    margin: 0; 
+    font-size: 1.5rem; 
+}
+
+/* Footer */
+footer {
+    text-align: center; 
+    padding: 30px; 
+    background-color: #00FF00; /* Set footer background to green */
+    color: #000000; /* Change text color for contrast */
+    border-top: 2px solid #ffffff; 
+    box-shadow: 0 -2px 15px rgba(255,255,255,0.3); 
+}
+
+footer a {
+    color: #000000; /* Change link color for contrast */
+    margin: 0 15px; 
+    text-decoration: none; 
+    font-size: 1.1rem; 
+}
+
+footer a:hover {
+    color: #D8BFD8;
+}
+
+/* Code Section Styling */
+.code-section {
+    margin-bottom: 20px; 
+}
+
+.code {
+    width: 100%; 
+    height: 150px; 
+    padding: 10px; 
+    border: 1px solid rgba(255,255,255,0.3); /* Softer border */
+    border-radius: 5px; 
+    font-family: "Courier New", monospace; 
+    background-color: rgba(50,50,50,0.8); /* Darker background for code area */
+    color: #ffffff; 
+    line-height: 1.5; /* Increased line height */
+}
+
+/* Button Styling with Transition */
+button {
+    padding: 10px 15px; 
+    background-color: #00FF00; /* Default button color green */
+    color: #000000; /* Change text color for contrast */
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.5s ease-in-out; /* Transition effect */
+}
+
+ button:hover {
+    background-color: #FF0000; /* Change to red on hover (optional) */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container { padding: 10px; }
+    
+    header h1 { font-size: 2.5rem; }
+    
+    header p { font-size: 1rem; }
+}
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -64,6 +179,7 @@
 <body>
     <div class="container container-custom">
         <h1>Privacy Policy</h1>
+        <img src="/img/logo.png" alt="Logo" style="width: 100px; height: auto; display: block; margin: 0 auto;">
         <p>Your privacy is of utmost importance to us. This document explains how your personal data is collected, used, and protected when you use our services.</p>
 
         <h2>Information Collection</h2>
