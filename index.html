@@ -280,6 +280,8 @@
         <h2>JavaScript Algorithms and Data Structure Developer Projects</h2>
         <div class="embed js-algorithms">
             <h3>Palindrome Checker</h3>
+            <p class="codepen" data-height="300" data-theme-id="light" data-default-tab="html,result" data-slug-hash="QWeYbBj" data-pen-title="Palindrome Checker" data-preview="true" data-user="Niladri-Das" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <span>See the Pen <a href="https://codepen.io/Niladri-Das/pen/QWeYbBj">Palindrome Checker</a> by Niladri Das (<a href="https://codepen.io/Niladri-Das">@Niladri-Das</a>) on <a href="https://codepen.io">CodePen</a>.</span>
             </p>
             <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
         </div>
@@ -352,13 +354,6 @@
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Niladri Das. All rights reserved.</p>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="about.html">About the Code Editor</a> <!-- Link to the new page -->
-    </footer>
-
     <div class="container">
         <h2>Live Code Editor</h2>
         <div class="code-section">
@@ -382,7 +377,29 @@
         <iframe id="preview"></iframe>
     </div>
     
+    <footer>
+        <p>&copy; 2024 Niladri Das. All rights reserved.</p>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="about.html">About the Code Editor</a> <!-- Link to the new page -->
+    </footer>
+
     <script>
+
+        // Function to filter projects
+            function filterProjects() {
+            const filter = document.getElementById("projectFilter").value;
+            const embeds = document.querySelectorAll(".embed");
+
+            embeds.forEach(embed => {
+                if (filter === "all" || embed.classList.contains(filter)) {
+                    embed.style.display = "block";
+                } else {
+                    embed.style.display = "none";
+                }
+            });
+        }
+
         // Function to run the code
         document.getElementById('runButton').addEventListener('click', function() {
             const htmlCode = document.getElementById('htmlCode').value;
